@@ -7,6 +7,10 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 
+import android.provider.Settings.Secure;
+import android.telephony.TelephonyManager;
+import android.content.Context;
+
 public class RNReactNativeUniqueIdModule extends ReactContextBaseJavaModule {
 
   private final ReactApplicationContext reactContext;
@@ -16,25 +20,25 @@ public class RNReactNativeUniqueIdModule extends ReactContextBaseJavaModule {
     this.reactContext = reactContext;
   }
 
-  private String _getIMEI(Activity activity) {
-    TelephonyManager telephonyManager = (TelephonyManager) activity
+  private String _getIMEI() {
+    TelephonyManager telephonyManager = (TelephonyManager) this.reactContext.getCurrentActivity()
             .getSystemService(Context.TELEPHONY_SERVICE);
     return telephonyManager.getDeviceId();
   }
 
-  private String _getDeviceUniqueID(Activity activity){
-    String device_unique_id = Secure.getString(activity.getContentResolver(),
+  private String _getDeviceUniqueID(){
+    String device_unique_id = Secure.getString(this.reactContext.getCurrentActivity().getContentResolver(),
             Secure.ANDROID_ID);
     return device_unique_id;
   }
 
   @ReactMethod
-  public getIMEI (Promise promise) {
+  public void getIMEI (Promise promise) {
     promise.resolve(this._getIMEI());
   }
 
   @ReactMethod
-  public getUiniqueId (Promise promise) {
+  public void getUiniqueId (Promise promise) {
     promise.resolve(this._getDeviceUniqueID());
   }
 

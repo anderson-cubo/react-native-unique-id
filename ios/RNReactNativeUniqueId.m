@@ -1,5 +1,6 @@
 
 #import "RNReactNativeUniqueId.h"
+#import <UIKit/UIKit.h>
 
 @implementation RNReactNativeUniqueId
 
@@ -26,4 +27,4 @@ RCT_REMAP_METHOD(getUiniqueId,
 }
 
 @end
-  
+

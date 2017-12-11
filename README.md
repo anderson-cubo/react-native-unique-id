@@ -39,6 +39,6 @@
 import UniqueId from 'react-native-unique-id';
 
 Promise => UniqueId.getIMEI()
-Promise => UniqueId.getUiniqueId()
+Promise => UniqueId.getUniqueId()
 ```
   
